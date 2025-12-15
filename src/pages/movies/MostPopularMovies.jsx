@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMostPopularMovies } from "@/api/movie.api";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function MostPopularMovies() {
   const [movies, setMovies] = useState([]);
@@ -43,15 +44,21 @@ export default function MostPopularMovies() {
       ) : movies.length > 0 ? (
         <>
           <div className="flex justify-center">
-            <div className="flex flex-col items-center w-full max-w-md">
-              <img
-                src={movie.image}
-                alt={movie.title}
-                className="w-full h-96 object-contain rounded-md shadow-md"
-              />
-              <h3 className="mt-3 text-xl font-semibold text-center">
-                {movie.title}
-              </h3>
+            <div className="flex flex-col items-center max-w-md mx-auto">
+              <Link to={`/movies/${movie.id}`}>
+                <img
+                  src={movie.image}
+                  alt={movie.title}
+                  className="w-full h-96 object-contain rounded-md shadow-md cursor-pointer"
+                />
+              </Link>
+
+              <Link to={`/movies/${movie.id}`}>
+                <h3 className="mt-3 text-xl font-semibold text-center cursor-pointer hover:underline">
+                  {movie.title}
+                </h3>
+              </Link>
+
               <p className="mt-1 text-center text-gray-600">
                 Rating: {movie.rate}
               </p>

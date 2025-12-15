@@ -35,3 +35,7 @@ export async function searchMoviesByPerson(person, page = 1, limit = 30) {
     )}&page=${page}&limit=${limit}`
   );
 }
+
+export async function getMovieDetail(id) {
+  return await apiFetch(`/movies/${id}`);
+}
