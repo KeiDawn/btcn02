@@ -9,15 +9,15 @@ export default function MostPopularMovies() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const limit = 5; // Lấy 5 phim ở lần gọi đầu tiên
+  const limit = 5;
 
   useEffect(() => {
     async function fetchMovies() {
       setLoading(true);
       try {
-        const res = await getMostPopularMovies(1, limit); // Lấy 5 phim một lần
+        const res = await getMostPopularMovies(1, limit);
         setMovies(res.data);
-        setTotalPages(res.data.length); // tổng phim trong mảng (có thể khác với pagination)
+        setTotalPages(res.data.length); // mỗi phim 1 trang
       } catch (error) {
         console.error("Failed to fetch movies", error);
       } finally {
@@ -35,14 +35,14 @@ export default function MostPopularMovies() {
   };
 
   return (
-    <section className="max-w-5xl mx-auto py-6 px-4 relative">
-      <h2 className="text-2xl font-bold mb-4">Top 5 Phim Doanh Thu Cao Nhất</h2>
-
+    <section className="relative max-w-5xl mx-auto px-4 mt-12 py-6">
       {loading ? (
         <p>Loading...</p>
       ) : movies.length > 0 ? (
         <>
-          <div className="flex justify-center">
+          <div className="flex justify-center px-12">
+            {" "}
+            {/* padding tránh đè nút */}
             <MovieCard movie={movies[page - 1]} className="max-w-md" />
           </div>
 
@@ -61,10 +61,6 @@ export default function MostPopularMovies() {
           >
             <ChevronRight size={24} />
           </button>
-
-          <p className="text-center mt-2">
-            Phim {page} / {totalPages}
-          </p>
         </>
       ) : (
         <p>Không có phim để hiển thị</p>
