@@ -40,7 +40,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-[70vh]">
+    <div className="flex justify-center items-center min-h-[calc(100vh-160px)] py-6">
       <Card className="w-95">
         <CardHeader className="text-xl font-bold">Login</CardHeader>
         <CardContent>
