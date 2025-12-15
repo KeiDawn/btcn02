@@ -6,6 +6,7 @@ import Register from "@/pages/auth/Register";
 import Profile from "@/pages/profile/Profile";
 import Favourites from "@/pages/profile/Favourites";
 import ProtectedRoute from "@/components/common/ProtectedRoute";
+import MovieSearch from "@/pages/movies/MovieSearch";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,11 @@ export const router = createBrowserRouter([
             <Favourites />
           </ProtectedRoute>
         ),
+      },
+
+      {
+        path: "/movies/search",
+        element: <MovieSearch />,
       },
     ],
   },
