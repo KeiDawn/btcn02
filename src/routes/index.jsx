@@ -7,6 +7,7 @@ import Profile from "@/pages/profile/Profile";
 import Favourites from "@/pages/profile/Favourites";
 import ProtectedRoute from "@/components/common/ProtectedRoute";
 import MovieSearch from "@/pages/movies/MovieSearch";
+import MovieSearchByPerson from "@/pages/movies/MovieSearchByPerson";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ export const router = createBrowserRouter([
       {
         path: "/movies/search",
         element: <MovieSearch />,
+      },
+
+      {
+        path: "/movies/search-by-person",
+        element: <MovieSearchByPerson />,
       },
     ],
   },
