@@ -18,11 +18,16 @@ export async function getTopRatedMovies(page = 1, limit = 3) {
   );
 }
 
-// Tìm kiếm phim theo tên
 export async function searchMoviesByTitle(title, page = 1, limit = 10) {
   return await apiFetch(
     `/movies/search?title=${encodeURIComponent(
       title
     )}&page=${page}&limit=${limit}`
+  );
+}
+
+export async function searchMovies(query, page = 1, limit = 30) {
+  return await apiFetch(
+    `/movies/search?q=${encodeURIComponent(query)}&page=${page}&limit=${limit}`
   );
 }
