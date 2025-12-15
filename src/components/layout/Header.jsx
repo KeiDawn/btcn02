@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { Settings, Moon, Sun } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [dark, setDark] = useState(false);
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <header className={`w-full ${dark ? "bg-gray-900" : "bg-blue-300"}`}>
@@ -20,16 +27,18 @@ export default function Header() {
 
           {/* RIGHT */}
           <div className="flex items-center gap-3 text-white">
-            {user && (
+            {user ? (
               <>
                 <span className="text-sm">{user.username}</span>
                 <button
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="px-2 py-1 text-sm rounded hover:bg-black/10"
                 >
                   Logout
                 </button>
               </>
+            ) : (
+              <>{/* Có thể thêm link login/register ở đây nếu muốn */}</>
             )}
           </div>
         </div>
