@@ -2,11 +2,16 @@ import { cn } from "@/lib/utils";
 
 export default function MovieCard({ movie, className }) {
   return (
-    <div className={className}>
+    <div
+      className={cn(
+        "w-48 h-72 rounded-md overflow-hidden shadow-md",
+        className
+      )}
+    >
       <img
         src={movie.image}
         alt={movie.title}
-        className="w-full h-64 object-contain bg-gray-200 rounded-md"
+        className="w-full h-full object-contain"
       />
     </div>
   );

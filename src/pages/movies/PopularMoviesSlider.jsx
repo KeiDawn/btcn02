@@ -1,30 +1,36 @@
 import { useEffect, useState } from "react";
-import { getMostPopularMovies } from "@/api/movie.api";
+import { getPopularMovies } from "@/api/movie.api";
+import MovieCard from "@/components/ui/MovieCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function MostPopularMovies() {
+export default function PopularMoviesSlider() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const limit = 5;
+  const limit = 15;
+  const moviesPerPage = 3;
 
   useEffect(() => {
     async function fetchMovies() {
       setLoading(true);
       try {
-        const res = await getMostPopularMovies(1, limit);
+        const res = await getPopularMovies(page, limit);
         setMovies(res.data);
-        setTotalPages(res.data.length);
+        setTotalPages(Math.ceil(res.data.length / moviesPerPage));
       } catch (error) {
-        console.error("Failed to fetch movies", error);
+        console.error("Failed to fetch popular movies", error);
       } finally {
         setLoading(false);
       }
     }
     fetchMovies();
-  }, []);
+  }, [page]);
+
+  const startIndex = (page - 1) * moviesPerPage;
+  const endIndex = startIndex + moviesPerPage;
+  const currentMovies = movies.slice(startIndex, endIndex);
 
   const prevPage = () => {
     setPage((p) => Math.max(1, p - 1));
@@ -33,29 +39,22 @@ export default function MostPopularMovies() {
     setPage((p) => Math.min(totalPages, p + 1));
   };
 
-  const movie = movies[page - 1];
-
   return (
-    // MostPopularMovies.jsx
     <section className="max-w-5xl mx-auto py-6 px-4 relative">
+      <h2 className="text-2xl font-bold mb-4">Most Popular</h2>
+
       {loading ? (
         <p>Loading...</p>
       ) : movies.length > 0 ? (
         <>
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center w-full max-w-md">
-              <img
-                src={movie.image}
-                alt={movie.title}
-                className="w-full h-96 object-contain rounded-md shadow-md"
+          <div className="flex space-x-4 overflow-hidden">
+            {currentMovies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                className="min-w-[200px]"
               />
-              <h3 className="mt-3 text-xl font-semibold text-center">
-                {movie.title}
-              </h3>
-              <p className="mt-1 text-center text-gray-600">
-                Rating: {movie.rate}
-              </p>
-            </div>
+            ))}
           </div>
 
           {/* Controls */}
