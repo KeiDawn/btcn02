@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import { getMostPopularMovies } from "@/api/movie.api";
+import { getTopRatedMovies } from "@/api/movie.api";
 import MovieCard from "@/components/ui/MovieCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function PopularMoviesSlider() {
+export default function TopRatedMovies() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const limit = 3; // Hiển thị 3 phim 1 lần
+  const limit = 3; // 3 movies per page
 
   useEffect(() => {
     async function fetchMovies() {
       setLoading(true);
       try {
-        const res = await getMostPopularMovies(page, limit);
+        const res = await getTopRatedMovies(page, limit);
         setMovies(res.data);
         setTotalPages(res.pagination.total_pages);
       } catch (error) {
-        console.error("Failed to fetch movies", error);
+        console.error("Failed to fetch top rated movies", error);
       } finally {
         setLoading(false);
       }
@@ -36,12 +36,13 @@ export default function PopularMoviesSlider() {
 
   return (
     <section className="relative max-w-4xl mx-auto py-6 px-4">
-      <h2 className="text-2xl font-bold mb-4">Most Popular</h2>
+      <h2 className="text-2xl font-bold mb-4">Top Rating</h2>
+
       {loading ? (
         <p>Loading...</p>
       ) : movies.length > 0 ? (
         <>
-          {/* Nút điều hướng trái */}
+          {/* Prev button */}
           <button
             onClick={prevPage}
             disabled={page === 1}
@@ -50,14 +51,14 @@ export default function PopularMoviesSlider() {
             <ChevronLeft size={24} />
           </button>
 
-          {/* Khung chứa 3 phim */}
+          {/* Movie cards container */}
           <div className="flex justify-center items-center space-x-6 overflow-hidden">
             {movies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} className="w-60" />
             ))}
           </div>
 
-          {/* Nút điều hướng phải */}
+          {/* Next button */}
           <button
             onClick={nextPage}
             disabled={page === totalPages}

@@ -1,5 +1,6 @@
 import MostPopularMovies from "@/pages/movies/MostPopularMovies";
 import PopularMoviesSlider from "@/pages/movies/PopularMoviesSlider";
+import TopRatedMovies from "@/pages/movies/TopRatedMovies";
 import Main from "@/components/layout/Main";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <Main>
       <MostPopularMovies />
       <PopularMoviesSlider />
+      <TopRatedMovies />
     </Main>
   );
 }
