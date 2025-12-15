@@ -9,7 +9,7 @@ export default function TopRatedMovies() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const limit = 3; // 3 movies per page
+  const limit = 3;
 
   useEffect(() => {
     async function fetchMovies() {
@@ -27,42 +27,50 @@ export default function TopRatedMovies() {
     fetchMovies();
   }, [page]);
 
-  const prevPage = () => {
-    setPage((p) => Math.max(1, p - 1));
-  };
-  const nextPage = () => {
-    setPage((p) => Math.min(totalPages, p + 1));
-  };
+  const prevPage = () => setPage((p) => Math.max(1, p - 1));
+  const nextPage = () => setPage((p) => Math.min(totalPages, p + 1));
 
   return (
-    <section className="relative max-w-4xl mx-auto py-6 px-4">
-      <h2 className="text-2xl font-bold mb-4">Top Rating</h2>
+    <section className="relative max-w-5xl mx-auto py-8 px-6 overflow-visible">
+      <h2 className="text-2xl font-bold mb-6 text-black">Top Rating</h2>
 
       {loading ? (
         <p>Loading...</p>
       ) : movies.length > 0 ? (
         <>
-          {/* Prev button */}
+          {/* PREV */}
           <button
             onClick={prevPage}
             disabled={page === 1}
-            className="absolute top-1/2 left-0 -translate-y-1/2 bg-gray-200 rounded-full p-2 disabled:opacity-30 z-10"
+            className="
+              absolute left-0 top-1/2 -translate-y-1/2
+              bg-gray-200 hover:bg-gray-300
+              rounded-full p-2
+              disabled:opacity-30
+              z-20
+            "
           >
             <ChevronLeft size={24} />
           </button>
 
-          {/* Movie cards container */}
-          <div className="flex justify-center items-center space-x-6 overflow-hidden">
+          {/* MOVIES */}
+          <div className="flex justify-center gap-10 overflow-visible">
             {movies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} className="w-60" />
             ))}
           </div>
 
-          {/* Next button */}
+          {/* NEXT */}
           <button
             onClick={nextPage}
             disabled={page === totalPages}
-            className="absolute top-1/2 right-0 -translate-y-1/2 bg-gray-200 rounded-full p-2 disabled:opacity-30 z-10"
+            className="
+              absolute right-0 top-1/2 -translate-y-1/2
+              bg-gray-200 hover:bg-gray-300
+              rounded-full p-2
+              disabled:opacity-30
+              z-20
+            "
           >
             <ChevronRight size={24} />
           </button>

@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { Settings, Moon, Sun } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Header() {
-  const [dark, setDark] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { dark, toggleDark } = useTheme();
 
   const handleLogout = () => {
     logout();
@@ -27,6 +27,14 @@ export default function Header() {
 
           {/* RIGHT */}
           <div className="flex items-center gap-3 text-white">
+            <button
+              onClick={toggleDark}
+              aria-label="Toggle dark mode"
+              className="p-1 rounded hover:bg-black/20 transition"
+            >
+              {dark ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
             {user ? (
               <>
                 <span className="text-sm">{user.username}</span>
@@ -37,9 +45,7 @@ export default function Header() {
                   Logout
                 </button>
               </>
-            ) : (
-              <>{/* Có thể thêm link login/register ở đây nếu muốn */}</>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

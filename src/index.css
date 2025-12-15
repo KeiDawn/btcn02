@@ -3,4 +3,11 @@
 body {
   font-family: "Playfair Display", serif;
   font-family: "Source Serif 4", serif;
+  background-color: #fff;
+  color: #000;
+}
+
+html.dark body {
+  background-color: #111827; /* màu tối */
+  color: #f9fafb; /* trắng sáng */
 }

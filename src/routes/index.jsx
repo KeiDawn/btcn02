@@ -48,6 +48,11 @@ export const router = createBrowserRouter([
         path: "/movies/:id",
         element: <MovieDetail />,
       },
+
+      // {
+      //   path: "/persons/:id",
+      //   element: <PersonDetail />,
+      // },
     ],
   },
 ]);

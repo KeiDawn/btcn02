@@ -9,7 +9,7 @@ export default function PopularMoviesSlider() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const limit = 3; // Hiển thị 3 phim 1 lần
+  const limit = 3;
 
   useEffect(() => {
     async function fetchMovies() {
@@ -27,41 +27,42 @@ export default function PopularMoviesSlider() {
     fetchMovies();
   }, [page]);
 
-  const prevPage = () => {
-    setPage((p) => Math.max(1, p - 1));
-  };
-  const nextPage = () => {
-    setPage((p) => Math.min(totalPages, p + 1));
-  };
+  const prevPage = () => setPage((p) => Math.max(1, p - 1));
+  const nextPage = () => setPage((p) => Math.min(totalPages, p + 1));
 
   return (
-    <section className="relative max-w-4xl mx-auto py-6 px-4">
-      <h2 className="text-2xl font-bold mb-4">Most Popular</h2>
+    <section className="relative max-w-5xl mx-auto py-6 px-4 overflow-visible">
+      <h2 className="text-2xl font-bold mb-6 text-black">Most Popular</h2>
+
       {loading ? (
         <p>Loading...</p>
       ) : movies.length > 0 ? (
         <>
-          {/* Nút điều hướng trái */}
+          {/* LEFT */}
           <button
             onClick={prevPage}
             disabled={page === 1}
-            className="absolute top-1/2 left-0 -translate-y-1/2 bg-gray-200 rounded-full p-2 disabled:opacity-30 z-10"
+            className="absolute top-1/2 -left-4 -translate-y-1/2
+                       bg-gray-200 rounded-full p-2
+                       disabled:opacity-30 z-20"
           >
             <ChevronLeft size={24} />
           </button>
 
-          {/* Khung chứa 3 phim */}
-          <div className="flex justify-center items-center space-x-6 overflow-hidden">
+          {/* MOVIES */}
+          <div className="flex justify-center gap-8">
             {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} className="w-60" />
+              <MovieCard key={movie.id} movie={movie} className="w-[220px]" />
             ))}
           </div>
 
-          {/* Nút điều hướng phải */}
+          {/* RIGHT */}
           <button
             onClick={nextPage}
             disabled={page === totalPages}
-            className="absolute top-1/2 right-0 -translate-y-1/2 bg-gray-200 rounded-full p-2 disabled:opacity-30 z-10"
+            className="absolute top-1/2 -right-4 -translate-y-1/2
+                       bg-gray-200 rounded-full p-2
+                       disabled:opacity-30 z-20"
           >
             <ChevronRight size={24} />
           </button>
