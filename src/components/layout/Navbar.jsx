@@ -22,13 +22,18 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-amber-100 shadow-sm mt-2">
+    <nav className="w-full bg-amber-100 shadow-sm transition-colors">
       <div className="h-12 flex items-center">
         <div className="w-full max-w-[1200px] mx-auto px-4 flex items-center justify-between">
           {/* LEFT */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-gray-700 hover:text-black"
+            className="
+                flex items-center gap-2
+                text-black dark:text-white
+                hover:text-gray-700 dark:hover:text-gray-300
+                transition-colors
+              "
           >
             <Home size={18} />
           </Link>

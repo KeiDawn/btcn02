@@ -30,6 +30,7 @@ export default function MostPopularMovies() {
   const prevPage = () => {
     setPage((p) => Math.max(1, p - 1));
   };
+
   const nextPage = () => {
     setPage((p) => Math.min(totalPages, p + 1));
   };
@@ -37,10 +38,15 @@ export default function MostPopularMovies() {
   const movie = movies[page - 1];
 
   return (
-    // MostPopularMovies.jsx
-    <section className="max-w-5xl mx-auto py-6 px-4 relative">
+    <section
+      className="
+        max-w-5xl mx-auto py-6 px-4 relative
+        text-black dark:text-white
+        transition-colors
+      "
+    >
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-center">Loading...</p>
       ) : movies.length > 0 ? (
         <>
           <div className="flex justify-center">
@@ -59,9 +65,7 @@ export default function MostPopularMovies() {
                 </h3>
               </Link>
 
-              <p className="mt-1 text-center text-gray-600">
-                Rating: {movie.rate}
-              </p>
+              <p className="mt-1 text-center">Rating: {movie.rate}</p>
             </div>
           </div>
 
@@ -69,20 +73,29 @@ export default function MostPopularMovies() {
           <button
             onClick={prevPage}
             disabled={page === 1}
-            className="absolute top-1/2 left-0 -translate-y-1/2 bg-gray-200 rounded-full p-2 disabled:opacity-30"
+            className="
+              absolute top-1/2 left-0 -translate-y-1/2
+              bg-gray-200 rounded-full p-2
+              disabled:opacity-30
+            "
           >
             <ChevronLeft size={24} />
           </button>
+
           <button
             onClick={nextPage}
             disabled={page === totalPages}
-            className="absolute top-1/2 right-0 -translate-y-1/2 bg-gray-200 rounded-full p-2 disabled:opacity-30"
+            className="
+              absolute top-1/2 right-0 -translate-y-1/2
+              bg-gray-200 rounded-full p-2
+              disabled:opacity-30
+            "
           >
             <ChevronRight size={24} />
           </button>
         </>
       ) : (
-        <p>No movies to display</p>
+        <p className="text-center">No movies to display</p>
       )}
     </section>
   );

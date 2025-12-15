@@ -14,7 +14,7 @@ export default function Header() {
   };
 
   return (
-    <header className={`w-full ${dark ? "bg-gray-900" : "bg-blue-300"}`}>
+    <header className="w-full bg-blue-300 transition-colors">
       <div className="h-12 flex items-center">
         <div className="w-full max-w-[1200px] mx-auto px-4 flex items-center justify-between">
           {/* LEFT */}

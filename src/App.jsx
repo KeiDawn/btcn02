@@ -5,13 +5,22 @@ import Footer from "@/components/layout/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div
+      className="
+        min-h-screen
+        flex flex-col
+        bg-white
+        dark:bg-neutral-600
+        transition-colors
+      "
+    >
       <Header />
       <Navbar />
 
-      <main className="min-h-[80vh] p-4 mt-2">
+      {/* MAIN CONTENT */}
+      <div className="flex-1">
         <Outlet />
-      </main>
+      </div>
 
       <Footer />
     </div>

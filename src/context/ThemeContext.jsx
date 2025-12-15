@@ -12,12 +12,11 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("dark_mode", dark);
+    const html = document.documentElement;
+
+    html.classList.toggle("dark", dark);
+
+    localStorage.setItem("dark_mode", dark ? "true" : "false");
   }, [dark]);
 
   const toggleDark = () => setDark((prev) => !prev);
